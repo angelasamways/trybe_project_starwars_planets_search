@@ -1,17 +1,27 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import SwContext from '../context/SwContext';
+import Filters from './Filters';
 
 export default function Table() {
   const {
     getFetch,
+    filterByName,
+    setAllPlanets,
+    allPlanets,
   } = useContext(SwContext);
 
   const headers = ['name', 'rotation_period', 'orbital_period', 'diameter',
     'climate', 'gravity', 'terrain', 'surface_water', 'population', 'films',
     'created', 'edited', 'url'];
 
+  useEffect(() => {
+    const { name: filteredName } = filterByName;
+    setAllPlanets(getFetch
+      .filter(({ name }) => (name.includes(filteredName) || !filteredName)));
+  }, [filterByName, getFetch, setAllPlanets]);
   return (
     <div>
+      <Filters />
       <table>
         <thead>
           <tr>
@@ -21,7 +31,7 @@ export default function Table() {
           </tr>
         </thead>
         <tbody>
-          { getFetch.map((planet, index) => (
+          {allPlanets.map((planet, index) => (
             <tr key={ index }>
               <td>{ planet.name }</td>
               <td>{ planet.rotation_period }</td>

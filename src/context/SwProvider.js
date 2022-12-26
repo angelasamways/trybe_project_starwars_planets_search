@@ -5,6 +5,8 @@ import SwAPI from '../services/SwAPI';
 
 function SwProvider({ children }) {
   const [getFetch, setGetFetch] = useState([]);
+  const [filterByName, setFilterByName] = useState({ name: '' });
+  const [allPlanets, setAllPlanets] = useState([]);
 
   const fetch = async () => {
     const getData = await SwAPI();
@@ -16,8 +18,12 @@ function SwProvider({ children }) {
 
   const data = useMemo(() => ({
     getFetch,
+    filterByName,
+    allPlanets,
     setGetFetch,
-  }), [getFetch, setGetFetch]);
+    setFilterByName,
+    setAllPlanets,
+  }), [getFetch, filterByName, allPlanets]);
 
   return (
     <SwContext.Provider value={ data }>
@@ -26,7 +32,7 @@ function SwProvider({ children }) {
   );
 }
 SwProvider.propTypes = {
-  children: PropTypes.shape({}),
+  children: PropTypes.arrayOf({}),
 }.isRequired;
 
 export default SwProvider;
