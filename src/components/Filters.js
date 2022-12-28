@@ -5,6 +5,7 @@ import FilterByNumber from './FilterByNumber';
 export default function Filters() {
   const {
     setFilterByName,
+    setFilterByNumber,
     filterByName: { name },
   } = useContext(SwContext);
 
@@ -26,6 +27,13 @@ export default function Filters() {
         </label>
       </div>
       <FilterByNumber />
+      <button
+        data-testid="button-remove-filters"
+        type="button"
+        onClick={ () => { setFilterByNumber([]); } }
+      >
+        Remover todas filtragens
+      </button>
     </section>
   );
 }
