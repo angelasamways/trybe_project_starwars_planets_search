@@ -7,6 +7,19 @@ function SwProvider({ children }) {
   const [getFetch, setGetFetch] = useState([]);
   const [filterByName, setFilterByName] = useState({ name: '' });
   const [allPlanets, setAllPlanets] = useState([]);
+  const [filterByNumber, setFilterByNumber] = useState([]);
+  const [filterValues, setFilterValues] = useState({
+    column: 'population',
+    comparison: 'maior que',
+    value: 0,
+  });
+  const [columns, setColumns] = useState([
+    'population',
+    'orbital_period',
+    'diameter',
+    'rotation_period',
+    'surface_water',
+  ]);
 
   const fetch = async () => {
     const getData = await SwAPI();
@@ -20,10 +33,16 @@ function SwProvider({ children }) {
     getFetch,
     filterByName,
     allPlanets,
+    filterByNumber,
+    filterValues,
+    columns,
     setGetFetch,
     setFilterByName,
     setAllPlanets,
-  }), [getFetch, filterByName, allPlanets]);
+    setFilterByNumber,
+    setFilterValues,
+    setColumns,
+  }), [getFetch, filterByName, allPlanets, filterByNumber, filterValues, columns]);
 
   return (
     <SwContext.Provider value={ data }>

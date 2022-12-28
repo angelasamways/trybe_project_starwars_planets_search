@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import SwContext from '../context/SwContext';
+import FilterByNumber from './FilterByNumber';
 
 export default function Filters() {
   const {
@@ -24,6 +25,7 @@ export default function Filters() {
           />
         </label>
       </div>
+      <FilterByNumber />
     </section>
   );
 }

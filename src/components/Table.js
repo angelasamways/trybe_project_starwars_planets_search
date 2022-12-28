@@ -8,17 +8,39 @@ export default function Table() {
     filterByName,
     setAllPlanets,
     allPlanets,
+    filterByNumber,
   } = useContext(SwContext);
 
-  const headers = ['name', 'rotation_period', 'orbital_period', 'diameter',
-    'climate', 'gravity', 'terrain', 'surface_water', 'population', 'films',
-    'created', 'edited', 'url'];
+  const headers = [
+    'name',
+    'rotation_period',
+    'orbital_period',
+    'diameter',
+    'climate',
+    'gravity',
+    'terrain',
+    'surface_water',
+    'population',
+    'films',
+    'created',
+    'edited',
+    'url',
+  ];
 
   useEffect(() => {
+    const comparation = {
+      maior(x, y) { return x > y; },
+      menor(x, y) { return x < y; },
+      igual(x, y) { return x === y; },
+    };
     const { name: filteredName } = filterByName;
     setAllPlanets(getFetch
-      .filter(({ name }) => (name.includes(filteredName) || !filteredName)));
-  }, [filterByName, getFetch, setAllPlanets]);
+      .filter(({ name }) => (name.includes(filteredName) || !filteredName))
+      .filter((planet) => filterByNumber
+        .every(({ column, comparison, value }) => (
+          comparation[comparison.split(' ')[0]](Number(planet[column]), Number(value))))
+           || !filterByNumber.length));
+  }, [filterByName, getFetch, setAllPlanets, filterByNumber]);
   return (
     <div>
       <Filters />
