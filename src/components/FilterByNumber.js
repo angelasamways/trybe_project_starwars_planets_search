@@ -1,28 +1,39 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import SwContext from '../context/SwContext';
+
+const COLUMNS = [
+  'population',
+  'orbital_period',
+  'diameter',
+  'rotation_period',
+  'surface_water',
+];
 
 export default function FilterByNumber() {
   const {
-    filterValues,
-    setFilterValues,
-    // filterByNumber,
+    filterByNumber,
     setFilterByNumber,
-    columns,
-    // setColumns,
   } = useContext(SwContext);
 
-  // useEffect(() => {
-  //   const filtered = columns
-  //     .filter((value) => !filterByNumber.some(({ column }) => column === value));
-  //   setColumns(filtered);
-  //   setFilterValues(({ comparison }) => ({
-  //     column: filtered[0],
-  //     comparison,
-  //     value: 0,
-  //   }));
-  // }, [columns, filterByNumber, setColumns, setFilterValues]);
+  const [columns, setColumns] = useState(COLUMNS);
+  const [filterValues, setFilterValues] = useState({
+    column: 'population',
+    comparison: 'maior que',
+    value: 0,
+  });
 
-  const onInputChange = ({ target: { name, value } }) => {
+  useEffect(() => {
+    const filtered = COLUMNS
+      .filter((value) => !filterByNumber.some(({ column }) => column === value));
+    setColumns(filtered);
+    setFilterValues(({ comparison }) => ({
+      column: filtered[0],
+      comparison,
+      value: 0,
+    }));
+  }, [filterByNumber]);
+
+  const onInputNumberChange = ({ target: { name, value } }) => {
     setFilterValues((prev) => ({
       ...prev,
       [name]: value,
@@ -47,7 +58,7 @@ export default function FilterByNumber() {
           id="column-filter"
           data-testid="column-filter"
           value={ column }
-          onChange={ onInputChange }
+          onChange={ onInputNumberChange }
         >
           {
             columns.map((item) => (<option key={ item } value={ item }>{ item }</option>))
@@ -61,7 +72,7 @@ export default function FilterByNumber() {
           id="comparison-filter"
           data-testid="comparison-filter"
           value={ comparison }
-          onChange={ onInputChange }
+          onChange={ onInputNumberChange }
         >
           <option value="maior que">maior que</option>
           <option value="menor que">menor que</option>
@@ -75,7 +86,7 @@ export default function FilterByNumber() {
           id="value-filter"
           data-testid="value-filter"
           value={ value }
-          onInput={ onInputChange }
+          onInput={ onInputNumberChange }
         />
       </label>
       <button
