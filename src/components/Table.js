@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import SwContext from '../context/SwContext';
 import Filters from './Filters';
+import FilteredValues from './FilteredValues';
 
 export default function Table() {
   const {
@@ -44,6 +45,15 @@ export default function Table() {
   return (
     <div>
       <Filters />
+      <div>
+        {
+          filterByNumber.map((filter, index) => (
+            <FilteredValues
+              key={ index }
+              filter={ filter }
+            />))
+        }
+      </div>
       <table>
         <thead>
           <tr>
