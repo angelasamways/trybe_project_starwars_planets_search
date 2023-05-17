@@ -1,10 +1,14 @@
-# :construction: README em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto.
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+### README
+
+Este projeto foi desenvolvido durante o período de Curso da Trybe 🚀
+
+O objetivo é criar uma lista com filtros de planetas do universo de Star Wars usando Context API e Hooks para controlar os estados globais.
+
+Habilidades:
+
+	•	Utilizar a Context API do React para gerenciar estado;
+	•	Utilizar o React Hook useState;
+	•	Utilizar o React Hook useContext;
+	•	Utilizar o React Hook useEffect;
+	•	Criar React Hooks customizados.
+	•	Testes para garantir que a aplicação possua uma boa cobertura de testes;
